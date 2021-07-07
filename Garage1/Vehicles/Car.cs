@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Garage1.Vehicles
+{
+    public class Car : Vehicle
+    {
+        private Fueltype fueltype;
+        public Fueltype FuelType { get => fueltype; set => fueltype = value; }
+        public Car(string registrationNumber, string color, int numberOfWheels, int modelYear, Fueltype fueltype) : base(registrationNumber, color, numberOfWheels, modelYear)
+        {
+            FuelType = fueltype;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Fuel type:{FuelType}";
+        }
+        public override Vehicle AddNewVehicle()
+        {
+            _ = base.AddNewVehicle();
+            SetFuelType();
+            return this;
+
+        }
+        void SetFuelType()
+        {
+            Fueltype fueltype=new  Fueltype();
+
+            ui.Print($"Select car fuel type  by inputting the number \n(1, 2)"
+                   + "\n1. Gasoline"
+                   + "\n2. Diesel");
+            char input = ' '; //Creates the character input to be used with the switch-case below.
+            try
+            {
+                input = ui.GetInput()[0]; //Tries to set input to the first char in an input line
+            }
+            catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input !!
+            {
+                Console.Clear();
+                ui.ChangeConsoleColor("Please enter some number! \n", ConsoleColor.Red);
+            }
+            switch (input)
+            {
+                case '1':
+                    fueltype = Fueltype.Gasoline;
+                    break;
+                case '2':
+                    fueltype = Fueltype.Diesel ;
+                    break;
+                default:
+                    ui.ChangeConsoleColor("Please enter some valid number (1, 2)\n", ConsoleColor.Red);
+                    SetFuelType();
+                    break;
+            }
+            this.FuelType = fueltype;
+
+        }
+    }
+}

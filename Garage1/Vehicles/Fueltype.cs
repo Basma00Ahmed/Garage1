@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Garage_1._0
+namespace Garage1.Vehicles
 {
-    public class IVehicle
+    public enum Fueltype
     {
+        Gasoline,
+        Diesel
     }
 }
