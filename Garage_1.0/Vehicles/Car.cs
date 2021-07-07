@@ -8,27 +8,30 @@ namespace Garage1.Vehicles
     {
         private Fueltype fueltype;
         public Fueltype FuelType { get => fueltype; set => fueltype = value; }
+
+        public Car()
+        { }
         public Car(string registrationNumber, string color, int numberOfWheels, int modelYear, Fueltype fueltype) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
             FuelType = fueltype;
         }
-
+        
         public override string ToString()
         {
             return base.ToString() + $"Fuel type:{FuelType}";
         }
-        public override Vehicle AddNewVehicle()
-        {
-            _ = base.AddNewVehicle();
-            SetFuelType();
-            return this;
+        //public override IVehicle AddNewVehicle()
+        //{
+        //    _ = base.AddNewVehicle();
+        //    SetFuelType();
+        //    return this;
 
-        }
+        //}
         void SetFuelType()
         {
             Fueltype fueltype=new  Fueltype();
 
-            ui.Print($"Select car fuel type  by inputting the number \n(1, 2)"
+            ui.Print($"Select Car fuel type  by inputting the number (1, 2)"
                    + "\n1. Gasoline"
                    + "\n2. Diesel");
             char input = ' '; //Creates the character input to be used with the switch-case below.

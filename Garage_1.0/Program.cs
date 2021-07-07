@@ -7,7 +7,7 @@ namespace Garage1
         static IUI ui = new ConsoleUI();
         static void Main(string[] args)
         {
-            ui.ChangeConsoleColor("---------Welcome To  Garage Project---------",ConsoleColor.Cyan);
+            
             ui.InstallNewGarage();
         }
     }

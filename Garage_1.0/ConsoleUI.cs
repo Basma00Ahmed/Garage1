@@ -7,6 +7,7 @@ namespace Garage1
 {
     public class ConsoleUI : IUI
     {
+        public Garage<Vehicle> garage;
         public ConsoleColor Color { get; set; }
         public string GetInput()
         {
@@ -31,10 +32,17 @@ namespace Garage1
             string name;
             int capacity=0;
             bool intCheck;
+            bool check_Name;
+            ChangeConsoleColor("---------Welcome To  Garage Project---------", ConsoleColor.Cyan);
             Print("Enter Garage Name : ");
             name = GetInput();
+            check_Name=ValidString (name);
+            if (check_Name == false)
+                InstallNewGarage();
             Print("Enter Garage Capacity : ");
-            intCheck = ValidInt(GetInput(),capacity);
+            intCheck = ValidInt(GetInput(),out capacity);
+            if(intCheck==false)
+                InstallNewGarage();
             Garage<Vehicle> garage = new Garage<Vehicle>(capacity, name);
             ChangeConsoleColor($"Successfully installed {name} garage\n", ConsoleColor.Green);
             DisplayGarageSubMenu(garage);
@@ -43,7 +51,7 @@ namespace Garage1
         {
             while (true)
             {
-                Print($"Please navigate through the {garage.Name } Garage menu by inputting the number \n(1, 2, 3, 4, 5, 6, 0) of your choice"
+                Print($"Please navigate through the {garage.Name} Garage menu by inputting the number \n(1, 2, 3, 4, 5, 6, 0) of your choice"
                     + "\n1. Park new vehicle"
                     + "\n2. Pick up vehicle"
                     + "\n3. List all parked vehicles"
@@ -87,6 +95,7 @@ namespace Garage1
                         break;
                     default:
                         ChangeConsoleColor("Please enter some valid input (0, 1, 2, 3, 4, 5, 6)\n", ConsoleColor.Red);
+                        DisplayGarageSubMenu(garage);
                         break;
                 }
             }
@@ -116,27 +125,40 @@ namespace Garage1
                 {
                     case '1':
                         ChangeConsoleColor("-------Airplane Information-------", ConsoleColor.Cyan);
-                       
+                        Airplane airplane = new Airplane();
+                        garage.AddVehicle(airplane, "Airplane");
                         break;
                     case '2':
                         ChangeConsoleColor("-------Boat Information-------", ConsoleColor.Cyan);
+                        Boat boat = new Boat();
+                        garage.AddVehicle(boat, "Boat");
                         break;
                     case '3':
                         ChangeConsoleColor("-------Bus Information-------", ConsoleColor.Cyan);
+                        Bus bus = new Bus();
+                        garage.AddVehicle(bus, "Bus");
                         break;
                     case '4':
                         ChangeConsoleColor("-------Car Information-------", ConsoleColor.Cyan);
+                        Car car = new Car();
+                        garage.AddVehicle(car, "Car");
+                        Print(car.ToString());
                         break;
                     case '5':
                         ChangeConsoleColor("-------Motorcycle Information-------", ConsoleColor.Cyan);
+                        Motorcycle motorcycle = new Motorcycle();
+                        garage.AddVehicle(motorcycle, "Motorcycle");
                         break;
                     case '0':
                         DisplayGarageSubMenu(garage);
                         break;
                     default:
                         ChangeConsoleColor("Please enter some valid input (0, 1, 2, 3, 4, 5)\n", ConsoleColor.Red);
+                        DisplayGarageSubMenu(garage);
                         break;
+                        
                 }
+                DisplayAddVehicleSubMenu(garage);
             }
         }
 
@@ -150,7 +172,7 @@ namespace Garage1
             else return true;
         }
 
-        public bool ValidInt(string message,int number)
+        public bool ValidInt(string message,out int number)
         {
             if (int.TryParse(message, out number )== false)
             {
@@ -161,7 +183,7 @@ namespace Garage1
                 return true;
         }
 
-        public bool ValidDouble(string message, double number)
+        public bool ValidDouble(string message,out double number)
         {
             if (double.TryParse(message, out number) == false)
             {

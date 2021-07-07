@@ -26,29 +26,27 @@ namespace Garage1.Vehicles
             NumberOfWheels = numberOfWheels;
             ModelYear = modelYear;
         }
+        public Vehicle()
+        {
+            SetRegistrationNumber();
+
+            SetColor();
+
+            SetNumberOfWheels();
+
+            SetModelYear();
+        }
         public override string ToString()
         {
             return $"Registration Number: {RegistrationNumber}  Color: {Color}  Number Of Wheels:{NumberOfWheels}  Model Year:{ModelYear}  ";
         }
 
-        public virtual Vehicle AddNewVehicle()
-        {
-            SetRegistrationNumber();
-           
-            SetColor();
-      
-            SetNumberOfWheels();
-         
-            SetModelYear();
-            return this;
-
-        }
 
         public void SetRegistrationNumber( )
         {
             bool check_registrationNumber;
             string registrationNumber;
-            ui.Print("Enter Registration Number of car:");
+            ui.Print("Enter The Registration Number :");
             registrationNumber = ui.GetInput();
             check_registrationNumber = ui.ValidString(registrationNumber);
             if (check_registrationNumber)
@@ -61,7 +59,7 @@ namespace Garage1.Vehicles
         {
             string color;
             bool check_color;
-            ui.Print("Enter Color of car:");
+            ui.Print("Enter The Color:");
             color = ui.GetInput();
             check_color = ui.ValidString(color);
             if (check_color)
@@ -74,8 +72,8 @@ namespace Garage1.Vehicles
         {
             int numberOfWheels = 0;
             bool check_numberOfWheels;
-            ui.Print("Enter Color of car:");
-            check_numberOfWheels = ui.ValidInt(ui.GetInput(), numberOfWheels);
+            ui.Print("Enter The Number Of Wheels:");
+            check_numberOfWheels = ui.ValidInt(ui.GetInput(),out numberOfWheels);
             if (check_numberOfWheels)
                 this.NumberOfWheels = numberOfWheels;
             else
@@ -86,8 +84,8 @@ namespace Garage1.Vehicles
         {
             int modelYear = 0;
             bool check_modelYear;
-            ui.Print("Enter Color of car:");
-            check_modelYear = ui.ValidInt(ui.GetInput(), modelYear);
+            ui.Print("Enter The Model Year:");
+            check_modelYear = ui.ValidInt(ui.GetInput(),out modelYear);
             if (check_modelYear)
                 this.ModelYear = modelYear;
             else
