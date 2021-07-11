@@ -8,8 +8,10 @@ namespace Garage1.Vehicles
     {
         private int cylinderVolume;
         public int CylinderVolume { get => cylinderVolume; set => cylinderVolume = value; }
-        public Motorcycle()
-        { }
+        public Motorcycle() : base()
+        {
+            SetCylinderVolume();
+        }
         public Motorcycle(string registrationNumber, string color, int numberOfWheels,int modelYear,int cylinderVolume) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
             CylinderVolume=cylinderVolume;
@@ -19,12 +21,6 @@ namespace Garage1.Vehicles
             return base.ToString() + $"CylinderVolume:{CylinderVolume}";
         }
 
-        //public override IVehicle AddNewVehicle()
-        //{
-        //    _ = base.AddNewVehicle();
-        //    SetCylinderVolume();
-        //    return this;
-        //}
         void SetCylinderVolume()
         {
             int cylinderVolume = 0;
@@ -35,6 +31,10 @@ namespace Garage1.Vehicles
                 this.CylinderVolume = cylinderVolume;
             else
                 SetCylinderVolume();
+        }
+        public override Type GetSubType()
+        {
+            return GetType();
         }
     }
 }

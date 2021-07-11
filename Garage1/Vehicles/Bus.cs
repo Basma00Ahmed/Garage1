@@ -8,8 +8,10 @@ namespace Garage1.Vehicles
     {
         private int numberOfSeats;
         public int NumberOfSeats { get => numberOfSeats; set => numberOfSeats = value; }
-        public Bus()
-        { }
+        public Bus() : base()
+        {
+            SetNumberOfSeats();
+        }
         public Bus(string registrationNumber, string color, int numberOfWheels, int modelYear, int numberOfSeats) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
             NumberOfSeats = numberOfSeats;
@@ -19,12 +21,7 @@ namespace Garage1.Vehicles
         {
             return base.ToString() + $"Number Of Seats:{NumberOfSeats}";
         }
-        //public override IVehicle AddNewVehicle()
-        //{
-        //    _ = base.AddNewVehicle();
-        //    SetNumberOfSeats();
-        //    return this;
-        //}
+
         void SetNumberOfSeats()
         {
             int numberOfSeats = 0;
@@ -35,6 +32,10 @@ namespace Garage1.Vehicles
                 this.NumberOfSeats= numberOfSeats;
             else
                 SetNumberOfSeats();
+        }
+        public override Type GetSubType()
+        {
+            return GetType();
         }
     }
 }

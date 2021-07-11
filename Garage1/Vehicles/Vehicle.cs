@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace Garage1.Vehicles
-{ 
-    
+{
+
     public abstract class Vehicle : IVehicle
     {
         internal IUI ui = new ConsoleUI();
@@ -79,7 +79,6 @@ namespace Garage1.Vehicles
             else
                 SetNumberOfWheels();
         }
-
         public void SetModelYear()
         {
             int modelYear = 0;
@@ -91,6 +90,6 @@ namespace Garage1.Vehicles
             else
                 SetModelYear();
         }
-
+        public abstract Type GetSubType();
     }
 }

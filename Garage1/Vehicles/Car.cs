@@ -9,8 +9,10 @@ namespace Garage1.Vehicles
         private Fueltype fueltype;
         public Fueltype FuelType { get => fueltype; set => fueltype = value; }
 
-        public Car()
-        { }
+        public Car() : base()
+        {
+            SetFuelType ();
+        }
         public Car(string registrationNumber, string color, int numberOfWheels, int modelYear, Fueltype fueltype) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
             FuelType = fueltype;
@@ -20,13 +22,7 @@ namespace Garage1.Vehicles
         {
             return base.ToString() + $"Fuel type:{FuelType}";
         }
-        //public override IVehicle AddNewVehicle()
-        //{
-        //    _ = base.AddNewVehicle();
-        //    SetFuelType();
-        //    return this;
-
-        //}
+   
         void SetFuelType()
         {
             Fueltype fueltype=new  Fueltype();
@@ -34,10 +30,10 @@ namespace Garage1.Vehicles
             ui.Print($"Select Car fuel type  by inputting the number (1, 2)"
                    + "\n1. Gasoline"
                    + "\n2. Diesel");
-            char input = ' '; //Creates the character input to be used with the switch-case below.
+            string input = ""; //Creates the character input to be used with the switch-case below.
             try
             {
-                input = ui.GetInput()[0]; //Tries to set input to the first char in an input line
+                input = ui.GetInput(); //Tries to set input to the first char in an input line
             }
             catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input !!
             {
@@ -46,10 +42,10 @@ namespace Garage1.Vehicles
             }
             switch (input)
             {
-                case '1':
+                case "1":
                     fueltype = Fueltype.Gasoline;
                     break;
-                case '2':
+                case "2":
                     fueltype = Fueltype.Diesel ;
                     break;
                 default:
@@ -59,6 +55,10 @@ namespace Garage1.Vehicles
             }
             this.FuelType = fueltype;
 
+        }
+        public override Type GetSubType()
+        {
+            return GetType();
         }
     }
 }

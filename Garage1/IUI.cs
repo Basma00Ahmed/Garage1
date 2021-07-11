@@ -7,13 +7,10 @@ namespace Garage1
 {
     interface IUI
     {
-        ConsoleColor Color { get; set; }
         string GetInput();
-        void Print(Vehicle vehicle);
         void Print(string message);
-        void DisplayGarageSubMenu(Garage<Vehicle> garage);
-        void DisplayAddVehicleSubMenu(Garage<Vehicle> garage);
-        void InstallNewGarage();
+        void DisplayGarageSubMenu(GarageHandler garage);
+        void DisplayAddVehicleSubMenu(GarageHandler garage);
         void ChangeConsoleColor(string message, ConsoleColor color);
         bool ValidString(string message);
         bool ValidInt(string message,out int number);

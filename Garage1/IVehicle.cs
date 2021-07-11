@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace Garage1.Vehicles
 {
     public interface IVehicle
@@ -10,11 +10,10 @@ namespace Garage1.Vehicles
         public string Color { get ; set ; }
         public int NumberOfWheels { get ; set; }
         public int ModelYear { get; set; }
-        //public IVehicle AddNewVehicle();
-
         public  void SetRegistrationNumber();
         public void SetColor();
         public void SetNumberOfWheels();
         public void SetModelYear();
+        public abstract Type GetSubType();
     }
 }

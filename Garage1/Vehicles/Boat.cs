@@ -8,7 +8,10 @@ namespace Garage1.Vehicles
     {
         private double length;
         public double Length { get => length; set => length = value; }
-        public Boat() { }
+        public Boat() : base()
+        {
+            SetLength();
+        }
         public Boat(string registrationNumber, string color, int numberOfWheels,int modelYear, double length) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
             Length= length;
@@ -18,12 +21,7 @@ namespace Garage1.Vehicles
         {
             return base.ToString() + $"Length:{Length}";
         }
-        //public override IVehicle AddNewVehicle()
-        //{
-        //    _ = base.AddNewVehicle();
-        //    SetLength();
-        //    return this;
-        //}
+
         void SetLength()
         {
             double length = 0;
@@ -34,6 +32,10 @@ namespace Garage1.Vehicles
                 this.Length = length;
             else
                 SetLength();
+        }
+        public override Type GetSubType()
+        {
+            return GetType();
         }
     }
 }
