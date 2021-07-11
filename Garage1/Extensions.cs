@@ -7,7 +7,7 @@ namespace Garage1
 {
     public static class Extensions
     {
-        public static IEnumerable<T> Filter<T>(this IEnumerable<T> source, List<Predicate<T>> predicates) where T : IVehicle
+        public static IEnumerable<T> Filter<T>(this IEnumerable<T> source, List<Predicate<T>> predicates) //where T : IVehicle
         {
             List<T> L = new List<T>();
             foreach (T item in source)

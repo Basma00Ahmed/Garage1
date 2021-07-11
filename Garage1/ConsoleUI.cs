@@ -163,6 +163,7 @@ namespace Garage1
                 DisplayAddVehicleSubMenu(garage);
             }
         }
+          
         public Filter filter= new Filter();
         public void DisplayVehicleSearchbMenu(GarageHandler garage)
         {   
@@ -333,7 +334,7 @@ namespace Garage1
                             DisplayVehicleSearchbMenu(garage);
                         }
                     case "11":
-                        garage.FilterVehicles(filter);
+                        garage.FilterVehicles(filter,true);
                         break;
                     case "0":
                         DisplayGarageSubMenu(garage);
