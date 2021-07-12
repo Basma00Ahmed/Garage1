@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Garage1.Vehicles
 {
@@ -12,9 +10,9 @@ namespace Garage1.Vehicles
         {
             SetLength();
         }
-        public Boat(string registrationNumber, string color, int numberOfWheels,int modelYear, double length) : base(registrationNumber, color, numberOfWheels, modelYear)
+        public Boat(string registrationNumber, string color, int numberOfWheels, int modelYear, double length) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
-            Length= length;
+            Length = length;
         }
 
         public override string ToString()
@@ -27,7 +25,7 @@ namespace Garage1.Vehicles
             double length = 0;
             bool check_length;
             ui.Print("Enter Boat Length:");
-            check_length = ui.ValidDouble(ui.GetInput(),out length);
+            check_length = ui.ValidDouble(ui.GetInput(), out length);
             if (check_length)
                 this.Length = length;
             else

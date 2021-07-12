@@ -1,8 +1,5 @@
 ﻿using Garage1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Garage1Tests
@@ -79,7 +76,7 @@ namespace Garage1Tests
             string registrationNumber = "RAC_987";
             ReadyGarage = testData.CreateGarageWithVehicles();
             string expected = $"Successfully Pick Up the Vehicle with Registration Number {registrationNumber} \n";
-          
+
             //Act
             var actual = ReadyGarage.RemoveVehicleFromGarage(registrationNumber, false);
             //Assert

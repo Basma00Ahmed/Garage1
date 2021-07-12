@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Garage1;
 using Garage1.Vehicles;
-using Garage1;
-using System.Linq;
 
 namespace Garage1Tests
 {

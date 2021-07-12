@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Garage1.Vehicles;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Garage1.Vehicles;
 
 namespace Garage1
 {
     public class ConsoleUI : IUI
     {
+        
+        public Filter filter = new Filter();
+        
         public string GetInput()
         {
             return Console.ReadLine();
@@ -50,11 +52,12 @@ namespace Garage1
             else
                 return true;
         }
+        #region Display Menu
         public void DisplayGarageSubMenu(GarageHandler garage)
         {
             while (true)
             {
-                ChangeConsoleColor("---------Garage Management---------", ConsoleColor.Cyan);
+                ChangeConsoleColor($"---------Garage {garage.Garage_.Name} Management---------", ConsoleColor.Cyan);
                 Print($"Please navigate through the {garage.Garage_.Name} Garage menu by inputting the number \n(1, 2, 3, 4, 5, 6, 0) of your choice"
                     + "\n1. Park new vehicle"
                     + "\n2. Pick up vehicle"
@@ -62,7 +65,7 @@ namespace Garage1
                     + "\n4. List vehicle types"
                     + "\n5. Find vehicle via registration number"
                     + "\n6. Search for vehicles"
-                    + "\n0. Exit the application");
+                    + "\n0. Exit to Previous menu");
                 string input = ""; //Creates the character input to be used with the switch-case below.
                 try
                 {
@@ -94,7 +97,7 @@ namespace Garage1
                         DisplayVehicleSearchbMenu(garage);
                         break;
                     case "0":
-                        Environment.Exit(0);
+                        DisplayGarageMenu(garage.GaragesList);
                         break;
                     default:
                         ChangeConsoleColor("Please enter some valid input (0, 1, 2, 3, 4, 5, 6)\n", ConsoleColor.Red);
@@ -163,10 +166,8 @@ namespace Garage1
                 DisplayAddVehicleSubMenu(garage);
             }
         }
-          
-        public Filter filter= new Filter();
         public void DisplayVehicleSearchbMenu(GarageHandler garage)
-        {   
+        {
             while (true)
             {
                 ChangeConsoleColor($"----------Vehicles Search----------", ConsoleColor.Cyan);
@@ -182,7 +183,7 @@ namespace Garage1
                     + "\n9. Cylinder Volume"
                     + "\n10.Vehicle Type");
                 ChangeConsoleColor("11.#### Show Search results ###", ConsoleColor.DarkYellow);
-                      Print("0. Exit to Previous menu");
+                Print("0. Exit to Previous menu");
                 string input = ""; //Creates the character input to be used with the switch-case below.
                 try
                 {
@@ -304,23 +305,23 @@ namespace Garage1
                             switch (answer)
                             {
                                 case "1":
-                                    filter.type="Airplane";
+                                    filter.vehicleType = "Airplane";
                                     DisplayVehicleSearchbMenu(garage);
                                     break;
                                 case "2":
-                                    filter.type = "Boat";
+                                    filter.vehicleType = "Boat";
                                     DisplayVehicleSearchbMenu(garage);
                                     break;
                                 case "3":
-                                    filter.type = "Bus";
+                                    filter.vehicleType = "Bus";
                                     DisplayVehicleSearchbMenu(garage);
                                     break;
                                 case "4":
-                                    filter.type = "Car";
+                                    filter.vehicleType = "Car";
                                     DisplayVehicleSearchbMenu(garage);
                                     break;
                                 case "5":
-                                    filter.type = "Motorcycle";
+                                    filter.vehicleType = "Motorcycle";
                                     DisplayVehicleSearchbMenu(garage);
                                     break;
                                 case "0":
@@ -334,7 +335,7 @@ namespace Garage1
                             DisplayVehicleSearchbMenu(garage);
                         }
                     case "11":
-                        garage.FilterVehicles(filter,true);
+                        garage.FilterVehicles(filter, true);
                         break;
                     case "0":
                         DisplayGarageSubMenu(garage);
@@ -347,5 +348,54 @@ namespace Garage1
                 DisplayVehicleSearchbMenu(garage);
             }
         }
+        public void DisplayGarageMenu(List<GarageHandler> GaragesList)
+        {
+            GarageHandler garage = new GarageHandler();
+            garage.GaragesList = GaragesList;
+            while (true)
+            {
+                ChangeConsoleColor("---------Garages Management---------", ConsoleColor.Cyan);
+                Print($"Please navigate through Garages Management Menu by inputting the number \n(1, 2, 3, 4, 0) of your choice"
+                    + "\n1. Install new garage"
+                    + "\n2. Uninstall garage"
+                    + "\n3. List all garages"
+                    + "\n4. Manage specific garage"
+                    + "\n0. Exit the application");
+                string input = ""; //Creates the character input to be used with the switch-case below.
+                try
+                {
+                    input = GetInput(); //Tries to set input to the first char in an input line
+                }
+                catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input !!
+                {
+                    Console.Clear();
+                    ChangeConsoleColor("Please enter some input! \n", ConsoleColor.Red);
+                }
+                switch (input)
+                {
+                    case "1":
+                        garage.InstallNewGarage();
+                       
+                        break;
+                    case "2":
+                            garage.UninstallGarage();
+                        break;
+                    case "3":
+                        garage.PrintAllGarages();
+                        break;
+                    case "4":
+                          garage.ManageGarage();
+                        break;
+                    case "0":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        ChangeConsoleColor("Please enter some valid input (0, 1, 2, 3, 4)\n", ConsoleColor.Red);
+                         DisplayGarageMenu(GaragesList);
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }

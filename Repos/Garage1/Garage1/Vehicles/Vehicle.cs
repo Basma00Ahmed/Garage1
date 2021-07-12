@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Garage1.Vehicles
@@ -16,12 +13,12 @@ namespace Garage1.Vehicles
         private int numberOfWheels;
         private int modelYear;
         public Regex regex = new Regex(@"^\+?\d{0,2}\-?\d{4,5}\-?\d{5,6}");
-        public string RegistrationNumber { get => registrationNumber; set => registrationNumber = value;}
+        public string RegistrationNumber { get => registrationNumber; set => registrationNumber = value; }
         public string Color { get => color; set => color = value; }
         public int NumberOfWheels { get => numberOfWheels; set => numberOfWheels = value; }
         public int ModelYear { get => modelYear; set => modelYear = value; }
 
-        public Vehicle(string registrationNumber, string color, int numberOfWheels,int modelYear)
+        public Vehicle(string registrationNumber, string color, int numberOfWheels, int modelYear)
         {
             RegistrationNumber = registrationNumber;
             Color = color;
@@ -44,20 +41,20 @@ namespace Garage1.Vehicles
         }
 
 
-        public void SetRegistrationNumber( )
+        public void SetRegistrationNumber()
         {
             bool check_registrationNumber, check_format;
             string registrationNumber;
             ui.Print("Enter The Registration Number Ex.'ABC123':");
             registrationNumber = ui.GetInput();
             check_registrationNumber = ui.ValidString(registrationNumber);
-            check_format =Regex.IsMatch(registrationNumber, @"^[A-Z]{3}[0-9]{3}$");
-            if (check_registrationNumber&& check_format)
+            check_format = Regex.IsMatch(registrationNumber, @"^[A-Z]{3}[0-9]{3}$");
+            if (check_registrationNumber && check_format)
                 this.RegistrationNumber = registrationNumber;
             else
             {
                 ui.ChangeConsoleColor("Invalid Vehicle Identification Number Format.", ConsoleColor.Red);
-               SetRegistrationNumber();
+                SetRegistrationNumber();
             }
         }
 
@@ -79,7 +76,7 @@ namespace Garage1.Vehicles
             int numberOfWheels = 0;
             bool check_numberOfWheels;
             ui.Print("Enter The Number Of Wheels:");
-            check_numberOfWheels = ui.ValidInt(ui.GetInput(),out numberOfWheels);
+            check_numberOfWheels = ui.ValidInt(ui.GetInput(), out numberOfWheels);
             if (check_numberOfWheels)
                 this.NumberOfWheels = numberOfWheels;
             else
@@ -90,7 +87,7 @@ namespace Garage1.Vehicles
             int modelYear = 0;
             bool check_modelYear;
             ui.Print("Enter The Model Year:");
-            check_modelYear = ui.ValidInt(ui.GetInput(),out modelYear);
+            check_modelYear = ui.ValidInt(ui.GetInput(), out modelYear);
             if (check_modelYear)
                 this.ModelYear = modelYear;
             else

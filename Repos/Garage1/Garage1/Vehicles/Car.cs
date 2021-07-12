@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Garage1.Vehicles
 {
@@ -11,21 +9,21 @@ namespace Garage1.Vehicles
 
         public Car() : base()
         {
-            SetFuelType ();
+            SetFuelType();
         }
         public Car(string registrationNumber, string color, int numberOfWheels, int modelYear, Fueltype fueltype) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
             FuelType = fueltype;
         }
-        
+
         public override string ToString()
         {
             return base.ToString() + $"Fuel type:{FuelType}";
         }
-   
+
         void SetFuelType()
         {
-            Fueltype fueltype=new  Fueltype();
+            Fueltype fueltype = new Fueltype();
 
             ui.Print($"Select Car fuel type  by inputting the number (1, 2)"
                    + "\n1. Gasoline"
@@ -46,7 +44,7 @@ namespace Garage1.Vehicles
                     fueltype = Fueltype.Gasoline;
                     break;
                 case "2":
-                    fueltype = Fueltype.Diesel ;
+                    fueltype = Fueltype.Diesel;
                     break;
                 default:
                     ui.ChangeConsoleColor("Please enter some valid number (1, 2)\n", ConsoleColor.Red);

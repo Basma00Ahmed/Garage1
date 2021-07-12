@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Garage1.Vehicles
 {
-    public class Motorcycle: Vehicle
+    public class Motorcycle : Vehicle
     {
         private int cylinderVolume;
         public int CylinderVolume { get => cylinderVolume; set => cylinderVolume = value; }
@@ -12,9 +10,9 @@ namespace Garage1.Vehicles
         {
             SetCylinderVolume();
         }
-        public Motorcycle(string registrationNumber, string color, int numberOfWheels,int modelYear,int cylinderVolume) : base(registrationNumber, color, numberOfWheels, modelYear)
+        public Motorcycle(string registrationNumber, string color, int numberOfWheels, int modelYear, int cylinderVolume) : base(registrationNumber, color, numberOfWheels, modelYear)
         {
-            CylinderVolume=cylinderVolume;
+            CylinderVolume = cylinderVolume;
         }
         public override string ToString()
         {
@@ -26,7 +24,7 @@ namespace Garage1.Vehicles
             int cylinderVolume = 0;
             bool check_cylinderVolume;
             ui.Print("Enter Cylinder Volume:");
-            check_cylinderVolume = ui.ValidInt(ui.GetInput(),out cylinderVolume);
+            check_cylinderVolume = ui.ValidInt(ui.GetInput(), out cylinderVolume);
             if (check_cylinderVolume)
                 this.CylinderVolume = cylinderVolume;
             else
