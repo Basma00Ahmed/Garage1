@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace Garage1.Vehicles
 {
 
@@ -13,8 +15,8 @@ namespace Garage1.Vehicles
         private string color;
         private int numberOfWheels;
         private int modelYear;
-     
-        public string RegistrationNumber { get => registrationNumber; set => registrationNumber = value; }
+        public Regex regex = new Regex(@"^\+?\d{0,2}\-?\d{4,5}\-?\d{5,6}");
+        public string RegistrationNumber { get => registrationNumber; set => registrationNumber = value;}
         public string Color { get => color; set => color = value; }
         public int NumberOfWheels { get => numberOfWheels; set => numberOfWheels = value; }
         public int ModelYear { get => modelYear; set => modelYear = value; }
@@ -44,15 +46,19 @@ namespace Garage1.Vehicles
 
         public void SetRegistrationNumber( )
         {
-            bool check_registrationNumber;
+            bool check_registrationNumber, check_format;
             string registrationNumber;
-            ui.Print("Enter The Registration Number :");
+            ui.Print("Enter The Registration Number Ex.'ABC123':");
             registrationNumber = ui.GetInput();
             check_registrationNumber = ui.ValidString(registrationNumber);
-            if (check_registrationNumber)
+            check_format =Regex.IsMatch(registrationNumber, @"^[A-Z]{3}[0-9]{3}$");
+            if (check_registrationNumber&& check_format)
                 this.RegistrationNumber = registrationNumber;
             else
+            {
+                ui.ChangeConsoleColor("Invalid Vehicle Identification Number Format.", ConsoleColor.Red);
                SetRegistrationNumber();
+            }
         }
 
         public void SetColor()
