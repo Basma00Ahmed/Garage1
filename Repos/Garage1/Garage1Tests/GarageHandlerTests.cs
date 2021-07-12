@@ -24,7 +24,7 @@ namespace Garage1Tests
             Assert.AreEqual(Actual.Garage_.Capacity, expected);
         }
         [TestMethod()]
-        public void ParkStatus_ReturnSuccessfulParkMsg_ShouldPass()
+        public void ParkVehicle_ReturnSuccessfulParkMsg_ShouldPass()
         {
 
             // Arrange
@@ -39,14 +39,75 @@ namespace Garage1Tests
             Assert.AreEqual(actual, expected);
         }
         [TestMethod()]
-        public void PickUpStatus_ReturnSuccessfulPickUpMsg_ShouldPass()
+        public void ParkVehicle_ReturnFullGarageCapacityMsg_ShouldPass()
+        {
+
+            // Arrange
+            TestData testData = new TestData();
+            GarageHandler ReadyGarage = new GarageHandler();
+            ReadyGarage = testData.CreateGarageWithVehicles();// full Garge
+            const string vehicleType = "Airplane";
+            string expected = "There is no space in the garage \n";
+
+            //Act
+            var actual = ReadyGarage.Park(testData.GetAirplaneObject_NO2(), vehicleType);
+            //Assert
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod()]
+        public void ParkVehicle_ReturnConflictInRegstrationNo_ShouldPass()
+        {
+
+            // Arrange
+            TestData testData = new TestData();
+            GarageHandler ReadyGarage = new GarageHandler();
+            ReadyGarage = testData.CreateGarageWithVehicles();
+            const string vehicleType = "Airplane";
+            string expected = $"There is another {vehicleType}  with same Registration Number\n";
+
+            //Act
+            var actual = ReadyGarage.Park(testData.GetAirplaneObject(), vehicleType);
+            //Assert
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod()]
+        public void PickUpVehicle_ReturnSuccessfulPickUpMsg_ShouldPass()
         {
             // Arrange
             TestData testData = new TestData();
             GarageHandler ReadyGarage = new GarageHandler();
             string registrationNumber = "RAC_987";
-            string expected = $"Successfully Pick Up the Vehicle with Registration Number {registrationNumber} \n";
             ReadyGarage = testData.CreateGarageWithVehicles();
+            string expected = $"Successfully Pick Up the Vehicle with Registration Number {registrationNumber} \n";
+          
+            //Act
+            var actual = ReadyGarage.RemoveVehicleFromGarage(registrationNumber, false);
+            //Assert
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod()]
+        public void PickUpVehicle_ReturnNoVehicleMatchedWithRegstrationNoMsg_ShouldPass()
+        {
+            // Arrange
+            TestData testData = new TestData();
+            GarageHandler ReadyGarage = new GarageHandler();
+            string registrationNumber = "ABC_987"; //Wrong registration Number
+            ReadyGarage = testData.CreateGarageWithVehicles();
+            string expected = $"There is no vehicle with this Registration Number \n";
+            //Act
+            var actual = ReadyGarage.RemoveVehicleFromGarage(registrationNumber, false);
+            //Assert
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod()]
+        public void PickUpVehicle_ReturnInvalidRegstrationNoMsg_ShouldPass()
+        {
+            // Arrange
+            TestData testData = new TestData();
+            GarageHandler ReadyGarage = new GarageHandler();
+            string registrationNumber = ""; //Wrong registration Number
+            ReadyGarage = testData.CreateGarageWithVehicles();
+            string expected = $"Enter valid  Registration Number !!\n";
             //Act
             var actual = ReadyGarage.RemoveVehicleFromGarage(registrationNumber, false);
             //Assert

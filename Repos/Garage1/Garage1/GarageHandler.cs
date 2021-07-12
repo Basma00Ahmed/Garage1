@@ -229,7 +229,7 @@ namespace Garage1
                 }
                 else
                 {
-                    outputMessage = $"There is no vehicle in the garage \n";
+                    outputMessage = $"There is no vehicle with this Registration Number \n";
                     ui.ChangeConsoleColor(outputMessage, ConsoleColor.Red);
                 }
                 if (EnableUserInteraction)
@@ -237,7 +237,7 @@ namespace Garage1
             }
             else
             {
-                outputMessage = $"There is no vehicle with this Registration Number \n";
+                outputMessage = $"Enter valid  Registration Number !!\n";
                 ui.ChangeConsoleColor(outputMessage, ConsoleColor.Red);
                 if (EnableUserInteraction)
                     PickUp();

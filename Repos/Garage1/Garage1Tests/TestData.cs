@@ -21,6 +21,17 @@ namespace Garage1Tests
             return airplane;
 
         }
+        public Airplane GetAirplaneObject_NO2()
+        {
+            const string registrationNumber = "Ria680";
+            const string color = "White";
+            const int numberOfWheels = 8;
+            const int modelYear = 2014;
+            const int numberOfEngines = 6;
+            Airplane airplane = new Airplane(registrationNumber, color, numberOfWheels, modelYear, numberOfEngines);
+            return airplane;
+
+        }
         public Boat GetBoatObject()
         {
             const string registrationNumber = "Bot321";
